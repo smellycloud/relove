@@ -80,6 +80,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "font_awesome_flutter",
+      "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-10.0.0-beta",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "get",
+      "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/get-4.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "intl_phone_number_input",
       "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/intl_phone_number_input-0.7.0+2",
       "packageUri": "lib/",
@@ -136,6 +148,12 @@
     {
       "name": "meta",
       "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "otp_text_field",
+      "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/otp_text_field-1.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -212,7 +230,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-02-15T18:54:03.237138Z",
+  "generated": "2022-02-16T15:12:36.602322Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

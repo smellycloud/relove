@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/ReloveImage.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:relove/components/authentication/RoundedContinueButton.dart';
+import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
+import 'otp_screen.dart';
 
 class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   @override
   Widget build(BuildContext context) {
     PhoneNumber _phoneNumber;
+    bool _emptyPhoneNumber = true;
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: SafeArea(
@@ -22,26 +26,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: ReloveImage(
-                width: 300.0,
-                height: 250.0,
-              ),
-            ),
-            const Center(
-              child: Text(
-                'Your One Stop Thrift Store',
-                style: TextStyle(
-                  fontFamily: "CaviarDreams",
-                  fontWeight: FontWeight.bold,
-                  color: kLightTextColor,
-                  fontSize: 18.0,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 100.0,
-            ),
+            const ReloveLogoWithTagline(),
             const Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
@@ -67,48 +52,29 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 spaceBetweenSelectorAndTextField: 0.0,
                 scrollPadding: const EdgeInsets.all(8.0),
                 onInputChanged: (value) {
-                  _phoneNumber = value;
-                  print(value);
+                  setState(() {
+                    _phoneNumber = value;
+                    _emptyPhoneNumber = _phoneNumber.props.isEmpty;
+                    print(_emptyPhoneNumber);
+                  });
                 },
-                textStyle: const TextStyle(
-                  color: kLightTextColor,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                selectorTextStyle: const TextStyle(
-                  color: kLightTextColor,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: kPhoneNumberTextStyle,
+                selectorTextStyle: kPhoneNumberTextStyle,
               ),
             ),
             const SizedBox(
-              height: 150,
+              height: 90,
+            //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
             ),
-            Center(
-              child: Material(
-                color: kPrimaryColor,
-                child: MaterialButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    side: const BorderSide(
-                      color: kLightTextColor,
-                      width: 1.0,
-                    ),
-                  ),
-                  minWidth: 400.0,
-                  height: 40.0,
-                  child: const Text(
-                    'CONTINUE',
-                    style: TextStyle(
-                      color: kLightTextColor,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  onPressed: () {},
+            if (_emptyPhoneNumber == true) ...[
+              Center(
+                child: RoundedContinueButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, OTPScreen.id);
+                  },
                 ),
               ),
-            )
+            ],
           ],
         ),
       ),
