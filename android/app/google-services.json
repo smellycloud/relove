@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "357194150997",
+    "project_id": "relove-73aaf",
+    "storage_bucket": "relove-73aaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357194150997:android:fb978e15e4d6864ff250dc",
+        "android_client_info": {
+          "package_name": "com.smellycloud.relove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357194150997-5m4gnelg1nhe37vmecu9im4jglkv4kkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD875HPJqSjVTNIb9_-ymBsP52cm5w1W28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "357194150997-5m4gnelg1nhe37vmecu9im4jglkv4kkb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

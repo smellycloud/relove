@@ -178,7 +178,7 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
             Center(
               child: RoundedContinueButton(
                 onPressed: () {
-                  //  Check if user account already exists. If yes, go to home. If no, go to style preferences screen
+                  //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
                 },
               ),
             )
