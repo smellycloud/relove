@@ -12,3 +12,4 @@ const kPhoneNumberTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const int kOTPCountdownTimerDuration = 90; // Seconds

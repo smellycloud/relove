@@ -6,7 +6,6 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class OTPScreen extends StatefulWidget {
   static const id = 'otp_screen';
 
@@ -16,11 +15,45 @@ class OTPScreen extends StatefulWidget {
   _OTPScreenState createState() => _OTPScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
+  late AnimationController _controller;
+
+  String get timerString {
+    Duration duration = _controller.duration! * _controller.value;
+    return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+  }
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        seconds: kOTPCountdownTimerDuration,
+      ), // gameData.levelClock is a user entered number elsewhere in the application
+    );
+    _controller.reverse(from: 1);
+
+    _controller.addStatusListener((status) {
+      print(status);
+      if (_controller.isDismissed) {
+        setState(() {
+          // print('reset timer now');
+          _controller.reset();
+        });
+      }
+    });
+
+    _controller.addListener(() {
+      setState(() {
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,8 +75,8 @@ class _OTPScreenState extends State<OTPScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Padding(
+                children: [
+                  const Padding(
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text(
                       'Enter OTP',
@@ -53,12 +86,12 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       right: 16.0,
                     ),
                     child: Text(
-                      '1:30',
-                      style: TextStyle(
+                      timerString,
+                      style: const TextStyle(
                         color: kLightTextColor,
                       ),
                     ),
@@ -97,10 +130,10 @@ class _OTPScreenState extends State<OTPScreen> {
                 fieldStyle: FieldStyle.box,
                 onChanged: (value) {
                   _otp = value;
-                  print(_otp);
                 },
                 onCompleted: (value) {
                   _otp = value;
+                  // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
                 },
               ),
             ),
@@ -112,6 +145,14 @@ class _OTPScreenState extends State<OTPScreen> {
                   IconButton(
                     onPressed: () {
                       //  Coordinate with timer
+                      if (_controller.isDismissed) {
+                        _controller.reverse(from: 1);
+                      } else {
+                        const snackBar = SnackBar(
+                          content: Text('Please wait for the countdown to complete'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     },
                     icon: const FaIcon(
                       FontAwesomeIcons.redoAlt,
