@@ -50,7 +50,7 @@ class Relove extends StatelessWidget {
         home: const AuthenticationScreen(),
         routes: {
           AuthenticationScreen.id: (context) => const AuthenticationScreen(),
-          OTPScreen.id: (context) => const OTPScreen(),
+          // OTPScreen.id: (context) => const OTPScreen(),
         },
     );
   }

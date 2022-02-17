@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
 import 'package:relove/components/authentication/RoundedContinueButton.dart';
@@ -9,7 +10,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class OTPScreen extends StatefulWidget {
   static const id = 'otp_screen';
 
-  const OTPScreen({Key? key}) : super(key: key);
+  const OTPScreen({Key? key, required this.phoneNumber}) : super(key: key);
+  final PhoneNumber phoneNumber;
+
 
   @override
   _OTPScreenState createState() => _OTPScreenState();
@@ -48,6 +51,7 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
       setState(() {
       });
     });
+
   }
 
   @override
