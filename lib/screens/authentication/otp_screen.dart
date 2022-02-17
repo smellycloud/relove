@@ -6,6 +6,8 @@ import 'package:relove/components/authentication/RoundedContinueButton.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:relove/screens/preferences/size_preference_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   static const id = 'otp_screen';
@@ -13,13 +15,13 @@ class OTPScreen extends StatefulWidget {
   const OTPScreen({Key? key, required this.phoneNumber}) : super(key: key);
   final PhoneNumber phoneNumber;
 
-
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
+  String? _otp;
 
   String get timerString {
     Duration duration = _controller.duration! * _controller.value;
@@ -29,6 +31,12 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    otpTimer();
+    verifyPhoneNumber();
+  }
+
+  otpTimer() {
+    // OTP Timer functionality
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -36,22 +44,63 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
       ), // gameData.levelClock is a user entered number elsewhere in the application
     );
     _controller.reverse(from: 1);
-
     _controller.addStatusListener((status) {
       print(status);
       if (_controller.isDismissed) {
-        setState(() {
-          // print('reset timer now');
-          _controller.reset();
-        });
+        // setState(() {
+        //   // print('reset timer now');
+        //
+        // });
+        _controller.reset();
       }
     });
-
     _controller.addListener(() {
-      setState(() {
-      });
+      setState(() {});
     });
+  }
 
+  verifyPhoneNumber() async {
+    print('phone num'+widget.phoneNumber.toString());
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: widget.phoneNumber.toString(),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        // ANDROID ONLY!
+        // Sign the user in (or link) with the auto-generated credential
+        await FirebaseAuth.instance
+            .signInWithCredential(credential)
+            .then((value) {
+          if (value.user != null) {
+            Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+          }
+        });
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        print(e.message.toString());
+        var snackBar = SnackBar(
+          content: Text(e.message.toString()),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      },
+      codeSent: (String verificationId, int? resendToken) async {
+        print(verificationId);
+        // Update the UI - wait for the user to enter the SMS code
+        setState(() {
+          _otp = verificationId;
+        });
+
+        // Create a PhoneAuthCredential with the code
+        // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _otp);
+        // Sign the user in (or link) with the credential
+        // await FirebaseAuth.instance.signInWithCredential(credential);
+      },
+      // timeout: const Duration(seconds: kOTPCountdownTimerDuration),
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // Auto-resolution timed out...
+        // setState(() {
+        //   _otp = verificationId;
+        // });
+      },
+    );
   }
 
   @override
@@ -63,8 +112,6 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     OtpFieldController otpController = OtpFieldController();
-
-    String _otp;
 
     return Scaffold(
       backgroundColor: kPrimaryColor,
@@ -135,8 +182,29 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                 onChanged: (value) {
                   _otp = value;
                 },
-                onCompleted: (value) {
-                  _otp = value;
+                onCompleted: (pin) async{
+                  _otp = pin;
+                  try {
+                    // Create a PhoneAuthCredential with the code
+                    // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _otp);
+                    await FirebaseAuth.instance
+                    .signInWithCredential(PhoneAuthProvider
+                    .credential(verificationId: _otp!, smsCode: pin))
+                    .then((value) {
+                      if(value.user != null)
+                        {
+                          Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                        }
+                    });
+                    // Sign the user in (or link) with the credential
+                    // await FirebaseAuth.instance.signInWithCredential(credential);
+                  }
+                  catch(e) {
+                    var snackBar = const SnackBar(
+                      content: Text('Invalid OTP'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
                   // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
                 },
               ),
@@ -150,10 +218,12 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                     onPressed: () {
                       //  Coordinate with timer
                       if (_controller.isDismissed) {
+                        verifyPhoneNumber();
                         _controller.reverse(from: 1);
                       } else {
                         const snackBar = SnackBar(
-                          content: Text('Please wait for the countdown to complete'),
+                          content:
+                              Text('Please wait for the countdown to complete'),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -183,6 +253,7 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
               child: RoundedContinueButton(
                 onPressed: () {
                   //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
+                  Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
                 },
               ),
             )

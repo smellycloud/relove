@@ -63,8 +63,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             ),
             Center(
               child: RoundedContinueButton(
-                onPressed: () {
-                  // Navigator.pushNamed(context, OTPScreen.id);
+                // Check phone number
+                onPressed: () async{
                   if (_phoneNumber.parseNumber() == '') {
                     const snackBar = SnackBar(
                       content: Text('Please enter a valid phone number'),

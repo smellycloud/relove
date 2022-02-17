@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/authentication/authentication_screen.dart';
 import 'screens/authentication/otp_screen.dart';
-
+import 'screens/preferences/size_preference_screen.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -25,6 +25,7 @@ class Relove extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
         defaultTransition: Transition.zoom,
       title: 'Relove',
         theme: ThemeData(
@@ -50,6 +51,7 @@ class Relove extends StatelessWidget {
         home: const AuthenticationScreen(),
         routes: {
           AuthenticationScreen.id: (context) => const AuthenticationScreen(),
+          SizePreferenceScreen.id: (context) => const SizePreferenceScreen(),
           // OTPScreen.id: (context) => const OTPScreen(),
         },
     );

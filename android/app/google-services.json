@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "357194150997-ibd9sg0c5tgl4v5bko03ck8feuvvd0o3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smellycloud.relove",
+            "certificate_hash": "f5c9ea56693d5189e651420c9a935571e80c052d"
+          }
+        },
+        {
           "client_id": "357194150997-5m4gnelg1nhe37vmecu9im4jglkv4kkb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "357194150997-5m4gnelg1nhe37vmecu9im4jglkv4kkb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "357194150997-gd0grfndqfkpf7ln4ngbnuo7jgdj5v7i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smellycloud.relove"
+              }
             }
           ]
         }
