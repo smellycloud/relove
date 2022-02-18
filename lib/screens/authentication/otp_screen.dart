@@ -20,8 +20,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
+  FirebaseAuth auth = FirebaseAuth.instance;
   late AnimationController _controller;
-  String? _otp;
+  String? _verificationId;
+  String? _smsCode;
 
   String get timerString {
     Duration duration = _controller.duration! * _controller.value;
@@ -32,7 +34,7 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     otpTimer();
-    verifyPhoneNumber();
+    verify();
   }
 
   otpTimer() {
@@ -47,10 +49,6 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
     _controller.addStatusListener((status) {
       print(status);
       if (_controller.isDismissed) {
-        // setState(() {
-        //   // print('reset timer now');
-        //
-        // });
         _controller.reset();
       }
     });
@@ -59,48 +57,92 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
     });
   }
 
-  verifyPhoneNumber() async {
-    print('phone num'+widget.phoneNumber.toString());
-    await FirebaseAuth.instance.verifyPhoneNumber(
+  // verifyPhoneNumber() async {
+  //   print('phone num' + widget.phoneNumber.toString());
+  //   await FirebaseAuth.instance.verifyPhoneNumber(
+  //     phoneNumber: widget.phoneNumber.toString(),
+  //     verificationCompleted: (PhoneAuthCredential credential) async {
+  //       // ANDROID ONLY!
+  //       // Sign the user in (or link) with the auto-generated credential
+  //       await FirebaseAuth.instance
+  //           .signInWithCredential(credential)
+  //           .then((value) {
+  //         if (value.user != null) {
+  //           Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+  //         }
+  //       });
+  //     },
+  //     verificationFailed: (FirebaseAuthException e) {
+  //       print(e.message.toString());
+  //       var snackBar = SnackBar(
+  //         content: Text(e.message.toString()),
+  //       );
+  //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //     },
+  //     codeSent: (String verificationId, int? resendToken) async {
+  //       print(verificationId);
+  //       // Update the UI - wait for the user to enter the SMS code
+  //       setState(() {
+  //         _verificationId = verificationId;
+  //       });
+  //     },
+  //     // timeout: const Duration(seconds: kOTPCountdownTimerDuration),
+  //     codeAutoRetrievalTimeout: (String verificationId) {
+  //       // Auto-resolution timed out...
+  //       setState(() {
+  //         _verificationId = verificationId;
+  //       });
+  //     },
+  //   );
+  // }
+
+  verify() async {
+    await auth.verifyPhoneNumber(
+      timeout: const Duration(seconds: kOTPCountdownTimerDuration),
       phoneNumber: widget.phoneNumber.toString(),
       verificationCompleted: (PhoneAuthCredential credential) async {
-        // ANDROID ONLY!
-        // Sign the user in (or link) with the auto-generated credential
-        await FirebaseAuth.instance
-            .signInWithCredential(credential)
-            .then((value) {
-          if (value.user != null) {
-            Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
-          }
-        });
+        await auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
-        print(e.message.toString());
         var snackBar = SnackBar(
           content: Text(e.message.toString()),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       codeSent: (String verificationId, int? resendToken) async {
-        print(verificationId);
-        // Update the UI - wait for the user to enter the SMS code
         setState(() {
-          _otp = verificationId;
+          _verificationId = verificationId;
         });
-
         // Create a PhoneAuthCredential with the code
-        // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _otp);
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _smsCode!);
+
         // Sign the user in (or link) with the credential
-        // await FirebaseAuth.instance.signInWithCredential(credential);
+        await auth.signInWithCredential(credential);
       },
-      // timeout: const Duration(seconds: kOTPCountdownTimerDuration),
       codeAutoRetrievalTimeout: (String verificationId) {
-        // Auto-resolution timed out...
-        // setState(() {
-        //   _otp = verificationId;
-        // });
+        setState(() {
+          _verificationId = verificationId;
+        });
       },
     );
+  }
+
+  void signIn() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithCredential(PhoneAuthProvider.credential(
+              verificationId: _verificationId!, smsCode: _smsCode!))
+          .then((value) {
+        if (value.user != null) {
+          Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+        }
+      });
+    } catch (e) {
+      var snackBar = const SnackBar(
+        content: Text('Invalid OTP'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override
@@ -179,32 +221,16 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                   fontWeight: FontWeight.bold,
                 ),
                 fieldStyle: FieldStyle.box,
-                onChanged: (value) {
-                  _otp = value;
+                onChanged: (pin) {
+                  setState(() {
+                    _smsCode = pin;
+                  });
                 },
-                onCompleted: (pin) async{
-                  _otp = pin;
-                  try {
-                    // Create a PhoneAuthCredential with the code
-                    // PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _otp);
-                    await FirebaseAuth.instance
-                    .signInWithCredential(PhoneAuthProvider
-                    .credential(verificationId: _otp!, smsCode: pin))
-                    .then((value) {
-                      if(value.user != null)
-                        {
-                          Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
-                        }
-                    });
-                    // Sign the user in (or link) with the credential
-                    // await FirebaseAuth.instance.signInWithCredential(credential);
-                  }
-                  catch(e) {
-                    var snackBar = const SnackBar(
-                      content: Text('Invalid OTP'),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
+                onCompleted: (pin) {
+                  setState(() {
+                    _smsCode = pin;
+                  });
+                  signIn();
                   // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
                 },
               ),
@@ -218,7 +244,11 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                     onPressed: () {
                       //  Coordinate with timer
                       if (_controller.isDismissed) {
-                        verifyPhoneNumber();
+                        verify();
+                        const snackBar = SnackBar(
+                          content: Text('Sending new OTP'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         _controller.reverse(from: 1);
                       } else {
                         const snackBar = SnackBar(

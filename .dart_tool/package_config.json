@@ -272,6 +272,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "otp_text_field",
       "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/otp_text_field-1.1.2",
       "packageUri": "lib/",
@@ -286,6 +292,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/picklerick/.pub-cache/hosted/pub.dartlang.org/provider-6.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -350,7 +362,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-02-16T18:25:44.756817Z",
+  "generated": "2022-02-18T13:03:35.611999Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

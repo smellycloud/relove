@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/constants.dart';
 import 'package:relove/components/authentication/RoundedContinueButton.dart';
-import 'package:relove/data.dart';
 import 'package:relove/components/preferences/SizeSelectorCard.dart';
+import 'package:relove/models/size_preferences.dart';
 
-class SizePreferenceScreen extends StatefulWidget {
+class SizePreferenceScreen extends StatelessWidget {
   static const id = 'size_preference_screen';
 
   const SizePreferenceScreen({Key? key}) : super(key: key);
 
   @override
-  _SizePreferenceScreenState createState() => _SizePreferenceScreenState();
-}
-
-List<Widget> buildSizeSelectorCards() {
-  List<Widget> sizeSelectorCards = [];
-  List<String> keys = [];
-
-  for (var key in sizeOptions.keys) {
-    keys.add(key);
-  }
-  for (String category in keys) {
-    sizeSelectorCards.add(SizeSelectorCard(categoryName: category));
-  }
-  return sizeSelectorCards;
-}
-
-class _SizePreferenceScreenState extends State<SizePreferenceScreen> {
-  @override
   Widget build(BuildContext context) {
+
+    // Start building SizeSelectorCards
+    SizePreferences sizePreferences = SizePreferences();
+    List<Widget> buildSizeSelectorCards() {
+      List<Widget> sizeSelectorCards = [];
+      for (String category in sizePreferences.getClothingCategoriesList()) {
+        sizeSelectorCards.add(SizeSelectorCard(
+            sizePreferences: sizePreferences, categoryName: category));
+      }
+      return sizeSelectorCards;
+    }
+
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: SafeArea(
@@ -64,7 +57,17 @@ class _SizePreferenceScreenState extends State<SizePreferenceScreen> {
             ),
             Expanded(
               flex: 1,
-                child: Center(child: RoundedContinueButton(onPressed: () {}))),
+              child: Center(
+                child: RoundedContinueButton(
+                  onPressed: () {
+                    // var data = sizePreferences.sizePreferenceData;
+                    // Send data => firebase userInfo document
+                    // if successful -> go to home, else show snackbar
+                    // verify if user has selected one size from each clothing category
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

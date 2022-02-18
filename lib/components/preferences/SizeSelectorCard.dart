@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/preferences/SizeSelectorBubble.dart';
-import 'package:relove/data.dart';
+import 'package:relove/models/size_preferences.dart';
 
-class SizeSelectorCard extends StatelessWidget {
+class SizeSelectorCard extends StatefulWidget {
   const SizeSelectorCard({
     Key? key,
+    required this.sizePreferences,
     required this.categoryName,
   }) : super(key: key);
 
-  final String? categoryName;
+  final String categoryName;
+  final SizePreferences sizePreferences;
 
-  List<Widget> buildSizeSelectorBubbles(String? categoryName) {
+  @override
+  State<SizeSelectorCard> createState() => _SizeSelectorCardState();
+}
+
+class _SizeSelectorCardState extends State<SizeSelectorCard> {
+  List<Widget> buildSizeSelectorBubbles({required String categoryName}) {
     List<Widget> sizeSelectorBubbles = [];
-    List<String>? sizes = sizeOptions[categoryName];
-    if(sizes != null) {
-      for (String size in sizes) {
-        sizeSelectorBubbles.add(SizeSelectorBubble(
-          size: size,
-          isSelected: false,
-          onTap: () {},
-        ));
-      }
+    List<String> sizes = [];
+
+    for (String size in widget.sizePreferences.getSizeOptionsList(categoryName: categoryName)) {
+      sizeSelectorBubbles.add(SizeSelectorBubble(
+        size: size,
+        isSelected: widget.sizePreferences.getSizeSelectedState(categoryName: categoryName, size: size),
+        onTap: () {
+          setState(() {
+            widget.sizePreferences.toggleSelectedState(categoryName: categoryName, size: size);
+          });
+        },
+      ));
     }
     return sizeSelectorBubbles;
   }
@@ -39,7 +49,9 @@ class SizeSelectorCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
-                "${categoryName![0].toUpperCase()}${categoryName!.substring(1).toLowerCase()}",
+                // Capitalize first letter
+                "${widget.categoryName[0].toUpperCase()}${widget.categoryName.substring(1)
+                    .toLowerCase()}",
                 style: const TextStyle(
                     color: kLightTextColor,
                     fontWeight: FontWeight.bold,
@@ -67,7 +79,7 @@ class SizeSelectorCard extends StatelessWidget {
           height: 100,
           child: ListView(
             shrinkWrap: true,
-            children: buildSizeSelectorBubbles(categoryName),
+            children: buildSizeSelectorBubbles(categoryName: widget.categoryName),
             scrollDirection: Axis.horizontal,
           ),
         ),
