@@ -51,12 +51,12 @@ class SizePreferences {
     return _sizeOptions.keys.toList();
   }
 
-  getSizeOptionsList({required String categoryName}) {
+  getSizeOptionsList({required String sizeCategoryName}) {
     // var sizeOptionsList = [];
     // for (var key in _sizeOptions.keys) {
     //   sizeOptionsList.add(key);
     // }
-    return _sizeOptions[categoryName]?.keys.toList();
+    return _sizeOptions[sizeCategoryName]?.keys.toList();
     // return sizeOptionsList;
   }
 

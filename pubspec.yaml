@@ -36,6 +36,7 @@ dependencies:
   cloud_firestore: ^3.1.8
   firebase_storage: ^10.2.7
   firebase_crashlytics: ^2.5.1
+  flutter_svg: ^1.0.3
   provider: ^6.0.2
   get: ^4.6.1
   flutter:
@@ -71,8 +72,21 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logo/relove.png
-#    - assets/utilities/reload.svg
-  #   - images/a_dot_ham.jpeg
+    - assets/utilities/back.svg
+    - assets/utilities/cart.svg
+    - assets/utilities/filter.svg
+    - assets/utilities/search.svg
+    - assets/utilities/wishlist_unselected.svg
+    - assets/category_images/accessories.png
+    - assets/category_images/beauty.png
+    - assets/category_images/kids.png
+    - assets/category_images/men.png
+    - assets/category_images/women.png
+    - assets/category_bubble_images/all.png
+    - assets/category_bubble_images/beauty.png
+    - assets/category_bubble_images/kids.png
+    - assets/category_bubble_images/women.png
+    - assets/category_bubble_images/men.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

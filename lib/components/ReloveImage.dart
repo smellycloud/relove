@@ -4,8 +4,8 @@ import 'package:relove/constants.dart';
 class ReloveImage extends StatelessWidget {
   const ReloveImage({required this.width, required this.height});
 
-  final width;
-  final height;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {

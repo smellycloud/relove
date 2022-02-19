@@ -7,10 +7,10 @@ class SizeSelectorCard extends StatefulWidget {
   const SizeSelectorCard({
     Key? key,
     required this.sizePreferences,
-    required this.categoryName,
+    required this.sizeCategoryName,
   }) : super(key: key);
 
-  final String categoryName;
+  final String sizeCategoryName;
   final SizePreferences sizePreferences;
 
   @override
@@ -18,17 +18,17 @@ class SizeSelectorCard extends StatefulWidget {
 }
 
 class _SizeSelectorCardState extends State<SizeSelectorCard> {
-  List<Widget> buildSizeSelectorBubbles({required String categoryName}) {
+  List<Widget> buildSizeSelectorBubbles({required String sizeCategoryName}) {
     List<Widget> sizeSelectorBubbles = [];
     List<String> sizes = [];
 
-    for (String size in widget.sizePreferences.getSizeOptionsList(categoryName: categoryName)) {
+    for (String size in widget.sizePreferences.getSizeOptionsList(sizeCategoryName: sizeCategoryName)) {
       sizeSelectorBubbles.add(SizeSelectorBubble(
         size: size,
-        isSelected: widget.sizePreferences.getSizeSelectedState(categoryName: categoryName, size: size),
+        isSelected: widget.sizePreferences.getSizeSelectedState(categoryName: sizeCategoryName, size: size),
         onTap: () {
           setState(() {
-            widget.sizePreferences.toggleSelectedState(categoryName: categoryName, size: size);
+            widget.sizePreferences.toggleSelectedState(categoryName: sizeCategoryName, size: size);
           });
         },
       ));
@@ -50,7 +50,7 @@ class _SizeSelectorCardState extends State<SizeSelectorCard> {
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
                 // Capitalize first letter
-                "${widget.categoryName[0].toUpperCase()}${widget.categoryName.substring(1)
+                "${widget.sizeCategoryName[0].toUpperCase()}${widget.sizeCategoryName.substring(1)
                     .toLowerCase()}",
                 style: const TextStyle(
                     color: kLightTextColor,
@@ -79,7 +79,7 @@ class _SizeSelectorCardState extends State<SizeSelectorCard> {
           height: 100,
           child: ListView(
             shrinkWrap: true,
-            children: buildSizeSelectorBubbles(categoryName: widget.categoryName),
+            children: buildSizeSelectorBubbles(sizeCategoryName: widget.sizeCategoryName),
             scrollDirection: Axis.horizontal,
           ),
         ),

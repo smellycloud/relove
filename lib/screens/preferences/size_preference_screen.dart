@@ -18,7 +18,7 @@ class SizePreferenceScreen extends StatelessWidget {
       List<Widget> sizeSelectorCards = [];
       for (String category in sizePreferences.getClothingCategoriesList()) {
         sizeSelectorCards.add(SizeSelectorCard(
-            sizePreferences: sizePreferences, categoryName: category));
+            sizePreferences: sizePreferences, sizeCategoryName: category));
       }
       return sizeSelectorCards;
     }
