@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
 class Category {
-  Category({required this.id, required this.title, this.imageUrl, required this.onTapNavigation, this.subCategories, this.bubbleImageUrl, this.color, this.subtext});
+  Category({required this.id, required this.title, this.imageUrl, required this.onTapNavigation, this.subCategories, this.bubbleImageUrl, this.color, this.subtext, this.namedRoute});
   final String id;
   final String title;
   final String? imageUrl;
   final String? bubbleImageUrl;
-  final VoidCallback onTapNavigation;
+  final Function onTapNavigation;
   final List<Category>? subCategories;
   final Color? color;
   final String? subtext;
+  final String? namedRoute;
 }
 
 get id {
@@ -55,6 +56,14 @@ get color {
 get subtext {
   if(subtext != null) {
     subtext;
+  } else {
+    return '';
+  }
+}
+
+get namedRoute {
+  if(namedRoute != null) {
+    namedRoute;
   } else {
     return '';
   }

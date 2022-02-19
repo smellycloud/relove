@@ -3,7 +3,7 @@ import 'package:relove/constants.dart';
 import 'package:relove/components/authentication/RoundedContinueButton.dart';
 import 'package:relove/components/preferences/SizeSelectorCard.dart';
 import 'package:relove/models/size_preferences.dart';
-
+import 'package:relove/screens/home/home.dart';
 class SizePreferenceScreen extends StatelessWidget {
   static const id = 'size_preference_screen';
 
@@ -64,6 +64,7 @@ class SizePreferenceScreen extends StatelessWidget {
                     // Send data => firebase userInfo document
                     // if successful -> go to home, else show snackbar
                     // verify if user has selected one size from each clothing category
+                    Navigator.popAndPushNamed(context, Home.id);
                   },
                 ),
               ),

@@ -1,14 +1,16 @@
 import 'package:relove/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:relove/screens/categories/categories_screen.dart';
 
 var categoryData = [
   Category(
-      id: '0',
-      title: 'All',
-      onTapNavigation: () {},
-      imageUrl: "",
-      bubbleImageUrl: "assets/category_bubble_images/all.png",
-      color: const Color(0xFFDEEEFF)),
+    id: '0',
+    title: 'All',
+    onTapNavigation: () {},
+    imageUrl: "",
+    bubbleImageUrl: "assets/category_bubble_images/all.png",
+    namedRoute: CategoriesScreen.id,
+  ),
   Category(
     id: '1',
     title: 'Women',
