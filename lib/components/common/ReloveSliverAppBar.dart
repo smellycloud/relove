@@ -20,7 +20,6 @@ class ReloveSliverAppBar extends StatelessWidget {
       floating: true,
       leadingWidth: 0.0,
       elevation: 0.0,
-      leading: null,
       flexibleSpace: const FlexibleSpaceBar(
         titlePadding: EdgeInsets.only(
           left: 16.0,

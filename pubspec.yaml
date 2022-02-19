@@ -87,6 +87,14 @@ flutter:
     - assets/category_bubble_images/kids.png
     - assets/category_bubble_images/women.png
     - assets/category_bubble_images/men.png
+    - assets/bottom_navigation_bar/home_selected.svg
+    - assets/bottom_navigation_bar/home_unselected.svg
+    - assets/bottom_navigation_bar/notification_selected.svg
+    - assets/bottom_navigation_bar/notification_unselected.svg
+    - assets/bottom_navigation_bar/profile_selected.svg
+    - assets/bottom_navigation_bar/profile_unselected.svg
+    - assets/bottom_navigation_bar/sell_selected.svg
+    - assets/bottom_navigation_bar/sell_unselected.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

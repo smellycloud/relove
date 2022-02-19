@@ -54,7 +54,7 @@ class Relove extends StatelessWidget {
         dividerColor: kLightTextColor,
         fontFamily: "Montserrat",
       ),
-      home: const AuthenticationScreen(),
+      home: const Home(),
       routes: {
         AuthenticationScreen.id: (context) => const AuthenticationScreen(),
         SizePreferenceScreen.id: (context) => const SizePreferenceScreen(),

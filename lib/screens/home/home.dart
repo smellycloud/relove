@@ -1,27 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/home/CategoryBubble.dart';
+import 'package:relove/models/category.dart';
 import 'package:relove/screens/categories/categories_screen.dart';
 import 'package:relove/data/category_data.dart';
 import 'package:relove/components/common/ReloveSliverAppBar.dart';
-import 'package:flutter/animation.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:relove/screens/sell/sell_screen.dart';
+import 'package:relove/screens/notifications/notification_screen.dart';
+import 'package:relove/screens/profile/profile_screen.dart';
+
 class Home extends StatefulWidget {
   static const id = 'home';
 
   const Home({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  int currentIndex = 0;
+
+  final screens = [
+    const SellScreen(),
+    const NotificationScreen(),
+    const ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: kPrimaryColor,
+        iconSize: 24.0,
+        selectedFontSize: 12.0,
+        unselectedFontSize: 12.0,
+        currentIndex: currentIndex,
+        showUnselectedLabels: false,
+        onTap: (index) => setState(() => currentIndex = index),
+        elevation: 0.0,
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
+            icon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/home_unselected.svg",
+            ),
+            activeIcon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/home_selected.svg",
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
+            icon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/sell_unselected.svg",
+            ),
+            activeIcon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/sell_selected.svg",
+            ),
+            label: 'Sell',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
+            icon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/notification_unselected.svg",
+            ),
+            activeIcon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/notification_selected.svg",
+            ),
+            label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: kPrimaryColor,
+            icon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/profile_unselected.svg",
+            ),
+            activeIcon: SvgPicture.asset(
+              "assets/bottom_navigation_bar/profile_selected.svg",
+            ),
+            label: 'Profile',
+          ),
+        ],
+      ),
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           const ReloveSliverAppBar(),
+          screens[currentIndex],
           SliverToBoxAdapter(
             child: SizedBox(
               height: 120.0,
