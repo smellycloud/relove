@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:relove/constants.dart';
+import 'package:relove/components/common/ReloveHomeScreenNestedScrollView.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Profile'),),);
+    Size size = MediaQuery.of(context).size;
+    return const Scaffold(
+      body: Center(
+        child: Text('Profile', style: TextStyle(color: kDarkTextColor),),
+      ),
+    );
   }
+}

@@ -4,6 +4,7 @@ import 'package:relove/components/common/ReloveSliverAppBar.dart';
 
 class CategoriesScreen extends StatefulWidget {
   static const id = 'categories_screen';
+
   const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
