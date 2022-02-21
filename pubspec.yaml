@@ -76,6 +76,7 @@ flutter:
     - assets/utilities/cart.svg
     - assets/utilities/filter.svg
     - assets/utilities/search.svg
+    - assets/utilities/navigate.svg
     - assets/utilities/wishlist_unselected.svg
     - assets/category_images/accessories.png
     - assets/category_images/beauty.png
@@ -95,6 +96,7 @@ flutter:
     - assets/bottom_navigation_bar/profile_unselected.svg
     - assets/bottom_navigation_bar/sell_selected.svg
     - assets/bottom_navigation_bar/sell_unselected.svg
+    - assets/component_images/card_background_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

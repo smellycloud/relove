@@ -12,10 +12,13 @@ const kCategoryBubbleBackgroundColor = Color(0xFFDA879A);
 
 const kLogoImageSource = 'assets/logo/relove.png';
 const kSearchButtonImageSource = 'assets/utilities/search.svg';
+const kNavigateImageSource = 'assets/utilities/navigate.svg';
 const kWishlistUnselectedButtonImageSource = 'assets/utilities/wishlist_unselected.svg';
 const kBackButtonImageSource = 'assets/utilities/back.svg';
 const kCartButtonImageSource = 'assets/utilities/cart.svg';
 const kFilterButtonImageSource = 'assets/utilities/filter.svg';
+const kCardBackgroundImageSource = 'assets/component_images/card_background_image.png';
+
 
 const kPhoneNumberTextStyle = TextStyle(
   color: kLightTextColor,

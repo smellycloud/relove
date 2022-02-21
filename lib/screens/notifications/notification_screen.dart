@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/ReloveHomeScreenNestedScrollView.dart';
+import 'package:relove/components/common/ReloveNestedScrollView.dart';
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
 
