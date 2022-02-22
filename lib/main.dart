@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relove/screens/authentication/otp_screen.dart';
 
 import 'screens/authentication/authentication_screen.dart';
 import 'screens/preferences/size_preference_screen.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'screens/home/home.dart';
 import 'screens/categories/categories_screen.dart';
+import 'screens/sell/sell_instructions_screen.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'constants.dart';
@@ -54,11 +56,12 @@ class Relove extends StatelessWidget {
         dividerColor: kLightTextColor,
         fontFamily: "Montserrat",
       ),
-      home: const Home(),
+      home: const SellInstructionsScreen(),
       routes: {
         AuthenticationScreen.id: (context) => const AuthenticationScreen(),
         SizePreferenceScreen.id: (context) => const SizePreferenceScreen(),
         CategoriesScreen.id: (context) => const CategoriesScreen(),
+        SellInstructionsScreen.id: (context) => const SellInstructionsScreen(),
         Home.id: (context) => const Home(),
         // OTPScreen.id: (context) => const OTPScreen(),
       },

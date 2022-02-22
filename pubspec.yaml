@@ -97,6 +97,10 @@ flutter:
     - assets/bottom_navigation_bar/sell_selected.svg
     - assets/bottom_navigation_bar/sell_unselected.svg
     - assets/component_images/card_background_image.png
+    - assets/sell_icons/step_1.png
+    - assets/sell_icons/step_2.png
+    - assets/sell_icons/step_3.png
+    - assets/sell_icons/step_4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

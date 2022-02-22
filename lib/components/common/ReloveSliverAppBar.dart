@@ -13,6 +13,8 @@ class ReloveSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  SliverAppBar(
+      // add on stretch trigger to refresh
+      stretch: true,
       toolbarHeight: 65.0,
       collapsedHeight: 65.0,
       snap: true,

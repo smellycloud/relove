@@ -12,6 +12,8 @@ const kSizeBubbleDefaultColor = kPrimaryColor;
 const kCategoryBubbleBackgroundColor = Color(0xFFDA879A);
 const kDividerColor = Color(0xFFF5F5F5);
 
+const kButtonSplashRadius = 20.0;
+
 const kLogoImageSource = 'assets/logo/relove.png';
 const kSearchButtonImageSource = 'assets/utilities/search.svg';
 const kNavigateImageSource = 'assets/utilities/navigate.svg';

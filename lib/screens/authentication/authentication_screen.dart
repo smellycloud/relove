@@ -58,7 +58,8 @@ class AuthenticationScreen extends StatelessWidget {
               height: 90,
               //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
             ),
-            Center(
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: RoundedBottomButton(
                 // Check phone number
                 buttonText: "CONTINUE",

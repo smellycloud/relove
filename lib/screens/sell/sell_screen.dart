@@ -4,7 +4,7 @@ import 'package:relove/constants.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:relove/components/common/ReloveNavigationTile.dart';
 import 'package:relove/components/common/RoundedBottomButton.dart';
-
+import 'package:relove/screens/sell/sell_instructions_screen.dart';
 class SellScreen extends StatelessWidget {
   const SellScreen({Key? key}) : super(key: key);
 
@@ -22,6 +22,7 @@ class SellScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Container(
                 height: 200.0,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     color: kPrimaryColor
@@ -63,9 +64,10 @@ class SellScreen extends StatelessWidget {
             ),
             ReloveNavigationTile(
               title: 'How it works',
-              subText: 'Try to stop this text from overflowing',
+              subText: 'Fill up our boxes with your clothes and send them to us. We’ll handle the rest!',
               onTap: () {
                 print("Nav card 1 tap!");
+                Navigator.pushNamed(context, SellInstructionsScreen.id);
               },
             ),
             const Divider(
@@ -74,7 +76,7 @@ class SellScreen extends StatelessWidget {
             ),
             ReloveNavigationTile(
               title: 'Credit Scheme',
-              subText: 'Try to stop this text too from overflowing',
+              subText: 'Once Items are received we calculate how much each item will sell for. These credits can be used inside our app!',
               onTap: () {
                 print("Nav card 2 tap!");
               },
@@ -83,16 +85,13 @@ class SellScreen extends StatelessWidget {
               thickness: 0.5,
               color: kDividerColor,
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: RoundedBottomButton(
-                onPressed: () {
-                  print("SELL MY CLOTHES!");
-                },
-                buttonText: "SELL MY CLOTHES!",
-                showBorder: false,
-              ),
-            )
+            RoundedBottomButton(
+              onPressed: () {
+                print("SELL MY CLOTHES!");
+              },
+              buttonText: "SELL MY CLOTHES!",
+              showBorder: false,
+            ),
           ],
         ),
       ),

@@ -12,6 +12,7 @@ class CartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      splashRadius: kButtonSplashRadius,
       splashColor: Colors.transparent,
       icon: SvgPicture.asset(
         kCartButtonImageSource,

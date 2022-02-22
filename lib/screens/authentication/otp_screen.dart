@@ -192,47 +192,50 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 32.0,
-              ),
-              child: OTPTextField(
-                margin: const EdgeInsets.only(
-                  top: 16.0,
-                  left: 16.0,
+            Expanded(
+              flex: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 32.0,
                 ),
-                otpFieldStyle: OtpFieldStyle(
-                  backgroundColor: Colors.white10,
-                  borderColor: Colors.transparent,
-                  disabledBorderColor: Colors.transparent,
-                  enabledBorderColor: Colors.transparent,
-                  errorBorderColor: Colors.transparent,
-                  focusBorderColor: Colors.transparent,
+                child: OTPTextField(
+                  margin: const EdgeInsets.only(
+                    top: 16.0,
+                    left: 16.0,
+                  ),
+                  otpFieldStyle: OtpFieldStyle(
+                    backgroundColor: Colors.white10,
+                    borderColor: Colors.transparent,
+                    disabledBorderColor: Colors.transparent,
+                    enabledBorderColor: Colors.transparent,
+                    errorBorderColor: Colors.transparent,
+                    focusBorderColor: Colors.transparent,
+                  ),
+                  controller: otpController,
+                  // margin: EdgeInsets.symmetric(horizontal: 0),
+                  length: 6,
+                  width: MediaQuery.of(context).size.width,
+                  textFieldAlignment: MainAxisAlignment.start,
+                  fieldWidth: 50,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    color: kLightTextColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  fieldStyle: FieldStyle.box,
+                  onChanged: (pin) {
+                    setState(() {
+                      _smsCode = pin;
+                    });
+                  },
+                  onCompleted: (pin) {
+                    setState(() {
+                      _smsCode = pin;
+                    });
+                    signIn();
+                    // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
+                  },
                 ),
-                controller: otpController,
-                // margin: EdgeInsets.symmetric(horizontal: 0),
-                length: 6,
-                width: MediaQuery.of(context).size.width,
-                textFieldAlignment: MainAxisAlignment.start,
-                fieldWidth: 50,
-                style: const TextStyle(
-                  fontSize: 24,
-                  color: kLightTextColor,
-                  fontWeight: FontWeight.bold,
-                ),
-                fieldStyle: FieldStyle.box,
-                onChanged: (pin) {
-                  setState(() {
-                    _smsCode = pin;
-                  });
-                },
-                onCompleted: (pin) {
-                  setState(() {
-                    _smsCode = pin;
-                  });
-                  signIn();
-                  // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
-                },
               ),
             ),
             Padding(
@@ -263,7 +266,7 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                       color: kLightTextColor,
                     ),
                     iconSize: 12.0,
-                    splashRadius: 20.0,
+                    splashRadius: kButtonSplashRadius,
                   ),
                   const Text(
                     'SEND AGAIN',
@@ -275,17 +278,17 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 90,
-              //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
-            ),
-            Center(
-              child: RoundedBottomButton(
-                buttonText: "CONTINUE",
-                onPressed: () {
-                  //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
-                  Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
-                },
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: RoundedBottomButton(
+                  buttonText: "CONTINUE",
+                  onPressed: () {
+                    //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
+                    Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                  },
+                ),
               ),
             )
           ],

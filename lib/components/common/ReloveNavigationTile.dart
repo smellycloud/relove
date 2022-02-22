@@ -20,32 +20,35 @@ class ReloveNavigationTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                      color: kDarkTextColor,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  subText,
-                  style: const TextStyle(
-                    color: kLightSubtextColor,
-                    fontSize: 12.0,
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0, top: 16.0),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                        color: kDarkTextColor,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
-              ),
-            ],
-            // direction: Axis.vertical,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    subText,
+                    style: const TextStyle(
+                      color: kLightSubtextColor,
+                      fontSize: 12.0,
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
+                ),
+              ],
+              // direction: Axis.vertical,
+            ),
           ),
           SvgPicture.asset(kNavigateImageSource),
         ],
