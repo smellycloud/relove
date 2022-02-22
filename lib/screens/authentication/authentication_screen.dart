@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:relove/components/authentication/RoundedContinueButton.dart';
+import 'package:relove/components/common/RoundedBottomButton.dart';
 import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
 import 'otp_screen.dart';
 
@@ -59,8 +59,9 @@ class AuthenticationScreen extends StatelessWidget {
               //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
             ),
             Center(
-              child: RoundedContinueButton(
+              child: RoundedBottomButton(
                 // Check phone number
+                buttonText: "CONTINUE",
                 onPressed: () async {
                   if (_phoneNumber.parseNumber() == '') {
                     const snackBar = SnackBar(

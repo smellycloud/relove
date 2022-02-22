@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 const kPrimaryColor = Color(0xFFA83C54);
 const kSecondaryColor = Colors.white;
 const kLightTextColor = Colors.white;
+const kLightSubtextColor = Color(0xFFACACAC);
 const kDarkTextColor = Colors.black;
 
 const kSizeBubbleBorderColor = Colors.white10;
 const kSizeBubbleSelectedColor = Colors.white10;
 const kSizeBubbleDefaultColor = kPrimaryColor;
 const kCategoryBubbleBackgroundColor = Color(0xFFDA879A);
+const kDividerColor = Color(0xFFF5F5F5);
 
 const kLogoImageSource = 'assets/logo/relove.png';
 const kSearchButtonImageSource = 'assets/utilities/search.svg';

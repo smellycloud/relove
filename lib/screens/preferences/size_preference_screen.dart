@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/authentication/RoundedContinueButton.dart';
+import 'package:relove/components/common/RoundedBottomButton.dart';
 import 'package:relove/components/preferences/SizeSelectorCard.dart';
 import 'package:relove/models/size_preferences.dart';
 import 'package:relove/screens/home/home.dart';
@@ -58,7 +58,8 @@ class SizePreferenceScreen extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Center(
-                child: RoundedContinueButton(
+                child: RoundedBottomButton(
+                  buttonText: "CONTINUE",
                   onPressed: () {
                     // var data = sizePreferences.sizePreferenceData;
                     // Send data => firebase userInfo document

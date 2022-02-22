@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
-import 'package:relove/components/authentication/RoundedContinueButton.dart';
+import 'package:relove/components/common/RoundedBottomButton.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -280,7 +280,8 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
               //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
             ),
             Center(
-              child: RoundedContinueButton(
+              child: RoundedBottomButton(
+                buttonText: "CONTINUE",
                 onPressed: () {
                   //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
                   Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
