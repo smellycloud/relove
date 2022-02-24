@@ -54,10 +54,10 @@ class AuthenticationScreen extends StatelessWidget {
                 selectorTextStyle: kPhoneNumberTextStyle,
               ),
             ),
-            const SizedBox(
-              height: 90,
-              //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
-            ),
+            // const SizedBox(
+            //   height: 90,
+            //   //  DANGEROUS - CAN CAUSE BOTTOM OVERFLOW ON SMALL SCREENS - FIX
+            // ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: RoundedBottomButton(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:relove/components/common/ReloveNestedScrollView.dart';
@@ -15,6 +16,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentScreenIndex = 0;
 
+  @override
+  void initState() {
+    print("user(home) : ${FirebaseAuth.instance.currentUser}");
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     PageController _pageController = PageController();

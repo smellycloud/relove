@@ -1,4 +1,3 @@
-
 // FIX THIS CRIME AGAINST HUMANITY!
 
 class SizePreferences {
@@ -46,7 +45,6 @@ class SizePreferences {
     }
   };
 
-
   getClothingCategoriesList() {
     return _sizeOptions.keys.toList();
   }
@@ -65,13 +63,26 @@ class SizePreferences {
   }
 
   toggleSelectedState({required String categoryName, required String size}) {
-    if(_sizeOptions[categoryName]![size]!['isSelected'] == true) {
+    if (_sizeOptions[categoryName]![size]!['isSelected'] == true) {
       _sizeOptions[categoryName]![size]!['isSelected'] = false;
     } else {
       _sizeOptions[categoryName]![size]!['isSelected'] = true;
     }
   }
 
-  Map<String, Map<String, Map<String, bool>>> get sizePreferenceData => _sizeOptions;
+  Map<String, Map<String, Map<String, bool>>> get sizePreferenceData =>
+      _sizeOptions;
 
+  getSizePreferences() {
+    var result = {};
+    for (var category in _sizeOptions.keys) {
+      result[category] = [];
+      for (var size in _sizeOptions[category]!.keys) {
+        if(_sizeOptions[category]![size]!['isSelected'] == true) {
+          result[category].add(size);
+        }
+      }
+    }
+    return result;
+  }
 }

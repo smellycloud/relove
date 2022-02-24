@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relove/relove_firebase/ReloveFirestoreRead.dart';
 import 'package:relove/screens/authentication/otp_screen.dart';
 
 import 'screens/authentication/authentication_screen.dart';
@@ -9,6 +10,7 @@ import 'firebase_options.dart';
 import 'screens/home/home.dart';
 import 'screens/categories/categories_screen.dart';
 import 'screens/sell/sell_instructions_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'constants.dart';
@@ -19,6 +21,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const Relove());
+}
+
+Widget getHomeRoute() {
+  if (FirebaseAuth.instance.currentUser != null) {
+    return const Home();
+  } else {
+    return const AuthenticationScreen();
+  }
 }
 
 class Relove extends StatelessWidget {
@@ -56,7 +66,7 @@ class Relove extends StatelessWidget {
         dividerColor: kLightTextColor,
         fontFamily: "Montserrat",
       ),
-      home: const SellInstructionsScreen(),
+      home: getHomeRoute(),
       routes: {
         AuthenticationScreen.id: (context) => const AuthenticationScreen(),
         SizePreferenceScreen.id: (context) => const SizePreferenceScreen(),

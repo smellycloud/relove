@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:relove/constants.dart';
+
 import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
 import 'package:relove/components/common/RoundedBottomButton.dart';
+
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:relove/screens/home/home.dart';
 import 'package:relove/screens/preferences/size_preference_screen.dart';
+
+import 'package:relove/relove_firebase/ReloveFirestoreWrite.dart';
+import 'package:relove/relove_firebase/ReloveFirestoreRead.dart';
 
 class OTPScreen extends StatefulWidget {
   static const id = 'otp_screen';
@@ -57,45 +68,6 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
     });
   }
 
-  // verifyPhoneNumber() async {
-  //   print('phone num' + widget.phoneNumber.toString());
-  //   await FirebaseAuth.instance.verifyPhoneNumber(
-  //     phoneNumber: widget.phoneNumber.toString(),
-  //     verificationCompleted: (PhoneAuthCredential credential) async {
-  //       // ANDROID ONLY!
-  //       // Sign the user in (or link) with the auto-generated credential
-  //       await FirebaseAuth.instance
-  //           .signInWithCredential(credential)
-  //           .then((value) {
-  //         if (value.user != null) {
-  //           Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
-  //         }
-  //       });
-  //     },
-  //     verificationFailed: (FirebaseAuthException e) {
-  //       print(e.message.toString());
-  //       var snackBar = SnackBar(
-  //         content: Text(e.message.toString()),
-  //       );
-  //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //     },
-  //     codeSent: (String verificationId, int? resendToken) async {
-  //       print(verificationId);
-  //       // Update the UI - wait for the user to enter the SMS code
-  //       setState(() {
-  //         _verificationId = verificationId;
-  //       });
-  //     },
-  //     // timeout: const Duration(seconds: kOTPCountdownTimerDuration),
-  //     codeAutoRetrievalTimeout: (String verificationId) {
-  //       // Auto-resolution timed out...
-  //       setState(() {
-  //         _verificationId = verificationId;
-  //       });
-  //     },
-  //   );
-  // }
-
   verify() async {
     await auth.verifyPhoneNumber(
       timeout: const Duration(seconds: kOTPCountdownTimerDuration),
@@ -114,7 +86,8 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
           _verificationId = verificationId;
         });
         // Create a PhoneAuthCredential with the code
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: _smsCode!);
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+            verificationId: verificationId, smsCode: _smsCode!);
 
         // Sign the user in (or link) with the credential
         await auth.signInWithCredential(credential);
@@ -134,7 +107,30 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
               verificationId: _verificationId!, smsCode: _smsCode!))
           .then((value) {
         if (value.user != null) {
-          Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+          var doc = getUserDocumentSnapshot(user: value.user);
+          if(doc != null) {
+            print('User exists');
+            if (doc(user: value.user)['size_preferences'] == null) {
+              // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+              Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
+            } else {
+              Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
+            }
+          } else {
+            if (addUserToFirestore(user: value.user) == true) {
+              // Check if size prefs exist
+              if (getUserDocumentSnapshot(user: value.user)['size_preferences'] == null) {
+                // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
+              } else {
+                Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
+              }
+            } else {
+              const snackBar = SnackBar(
+                content: Text('Could not create user. Try again in a while'),
+              );
+            }
+          }
         }
       });
     } catch (e) {
@@ -286,7 +282,41 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                   buttonText: "CONTINUE",
                   onPressed: () {
                     //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
-                    Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                      // var userDocumentSnapshot = getUserDocumentSnapshot(user: user);
+                      if (user == null) {
+                        print('User is currently signed out!');
+                        const snackBar = SnackBar(
+                          content: Text('Could not create user. Try again in a while'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        print('User is signed in!');
+                        var doc = getUserDocumentSnapshot(user: user);
+                        if(doc == null) {
+                          if (addUserToFirestore(user: user) == true) {
+                            // Check if size prefs exist
+                            if (doc(user: user)['size_preferences'] == null) {
+                              // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                              Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
+                            } else {
+                              Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
+                            }
+                          } else {
+                            const snackBar = SnackBar(
+                              content: Text('Could not create user. Try again in a while'),
+                            );
+                          }
+                        } else {
+                          if (doc(user: user)['size_preferences'] == null) {
+                            // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                            Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
+                          } else {
+                            Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
+                          }
+                        }
+                      }
+                    });
                   },
                 ),
               ),
