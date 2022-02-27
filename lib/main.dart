@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:relove/relove_firebase/ReloveFirestoreRead.dart';
-import 'package:relove/screens/authentication/otp_screen.dart';
-
 import 'screens/authentication/authentication_screen.dart';
 import 'screens/preferences/size_preference_screen.dart';
 import 'package:get/get.dart';
@@ -66,7 +63,7 @@ class Relove extends StatelessWidget {
         dividerColor: kLightTextColor,
         fontFamily: "Montserrat",
       ),
-      home: getHomeRoute(),
+      home: const Home(),
       routes: {
         AuthenticationScreen.id: (context) => const AuthenticationScreen(),
         SizePreferenceScreen.id: (context) => const SizePreferenceScreen(),

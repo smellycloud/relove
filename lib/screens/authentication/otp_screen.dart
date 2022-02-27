@@ -159,79 +159,73 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const ReloveLogoWithTagline(),
-            Expanded(
-              flex: 0,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: Text(
-                      'Enter OTP',
-                      style: TextStyle(
-                        color: kLightTextColor,
-                      ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    'Enter OTP',
+                    style: TextStyle(
+                      color: kLightTextColor,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 16.0,
-                    ),
-                    child: Text(
-                      timerString,
-                      style: const TextStyle(
-                        color: kLightTextColor,
-                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 16.0,
+                  ),
+                  child: Text(
+                    timerString,
+                    style: const TextStyle(
+                      color: kLightTextColor,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Expanded(
-              flex: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 32.0,
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 32.0,
+              ),
+              child: OTPTextField(
+                margin: const EdgeInsets.only(
+                  top: 16.0,
+                  left: 16.0,
                 ),
-                child: OTPTextField(
-                  margin: const EdgeInsets.only(
-                    top: 16.0,
-                    left: 16.0,
-                  ),
-                  otpFieldStyle: OtpFieldStyle(
-                    backgroundColor: Colors.white10,
-                    borderColor: Colors.transparent,
-                    disabledBorderColor: Colors.transparent,
-                    enabledBorderColor: Colors.transparent,
-                    errorBorderColor: Colors.transparent,
-                    focusBorderColor: Colors.transparent,
-                  ),
-                  controller: otpController,
-                  // margin: EdgeInsets.symmetric(horizontal: 0),
-                  length: 6,
-                  width: MediaQuery.of(context).size.width,
-                  textFieldAlignment: MainAxisAlignment.start,
-                  fieldWidth: 50,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: kLightTextColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  fieldStyle: FieldStyle.box,
-                  onChanged: (pin) {
-                    setState(() {
-                      _smsCode = pin;
-                    });
-                  },
-                  onCompleted: (pin) {
-                    setState(() {
-                      _smsCode = pin;
-                    });
-                    signIn();
-                    // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
-                  },
+                otpFieldStyle: OtpFieldStyle(
+                  backgroundColor: Colors.white10,
+                  borderColor: Colors.transparent,
+                  disabledBorderColor: Colors.transparent,
+                  enabledBorderColor: Colors.transparent,
+                  errorBorderColor: Colors.transparent,
+                  focusBorderColor: Colors.transparent,
                 ),
+                controller: otpController,
+                // margin: EdgeInsets.symmetric(horizontal: 0),
+                length: 6,
+                width: MediaQuery.of(context).size.width,
+                textFieldAlignment: MainAxisAlignment.start,
+                fieldWidth: 50,
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: kLightTextColor,
+                  fontWeight: FontWeight.bold,
+                ),
+                fieldStyle: FieldStyle.box,
+                onChanged: (pin) {
+                  setState(() {
+                    _smsCode = pin;
+                  });
+                },
+                onCompleted: (pin) {
+                  setState(() {
+                    _smsCode = pin;
+                  });
+                  signIn();
+                  // VALIDATE AND GO TO PREFERENCES OR HOME SCREEN
+                },
               ),
             ),
             Padding(
@@ -274,51 +268,48 @@ class _OTPScreenState extends State<OTPScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: RoundedBottomButton(
-                  buttonText: "CONTINUE",
-                  onPressed: () {
-                    //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
-                    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-                      // var userDocumentSnapshot = getUserDocumentSnapshot(user: user);
-                      if (user == null) {
-                        print('User is currently signed out!');
-                        const snackBar = SnackBar(
-                          content: Text('Could not create user. Try again in a while'),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else {
-                        print('User is signed in!');
-                        var doc = getUserDocumentSnapshot(user: user);
-                        if(doc == null) {
-                          if (addUserToFirestore(user: user) == true) {
-                            // Check if size prefs exist
-                            if (doc(user: user)['size_preferences'] == null) {
-                              // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
-                              Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
-                            } else {
-                              Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
-                            }
-                          } else {
-                            const snackBar = SnackBar(
-                              content: Text('Could not create user. Try again in a while'),
-                            );
-                          }
-                        } else {
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: RoundedBottomButton(
+                buttonText: "CONTINUE",
+                onPressed: () {
+                  //  Check if user account already exists and if otp is valid. If yes, go to home. If no, go to style preferences screen
+                  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                    // var userDocumentSnapshot = getUserDocumentSnapshot(user: user);
+                    if (user == null) {
+                      print('User is currently signed out!');
+                      const snackBar = SnackBar(
+                        content: Text('Could not create user. Try again in a while'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    } else {
+                      print('User is signed in!');
+                      var doc = getUserDocumentSnapshot(user: user);
+                      if(doc == null) {
+                        if (addUserToFirestore(user: user) == true) {
+                          // Check if size prefs exist
                           if (doc(user: user)['size_preferences'] == null) {
                             // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
                             Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
                           } else {
                             Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
                           }
+                        } else {
+                          const snackBar = SnackBar(
+                            content: Text('Could not create user. Try again in a while'),
+                          );
+                        }
+                      } else {
+                        if (doc(user: user)['size_preferences'] == null) {
+                          // Navigator.popAndPushNamed(context, SizePreferenceScreen.id);
+                          Navigator.pushNamedAndRemoveUntil(context, SizePreferenceScreen.id, ModalRoute.withName('authentication_screen'));
+                        } else {
+                          Navigator.pushNamedAndRemoveUntil(context, Home.id, ModalRoute.withName('authentication_screen'));
                         }
                       }
-                    });
-                  },
-                ),
+                    }
+                  });
+                },
               ),
             )
           ],

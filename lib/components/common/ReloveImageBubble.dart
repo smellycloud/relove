@@ -20,10 +20,12 @@ class ReloveImageBubble extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: kPrimaryColor,
-            // borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: Image.asset(kCardBackgroundImageSource).image,
+              fit: BoxFit.cover,
+            ),
           ),
           height: 160.0,
           width: 160.0,
@@ -40,10 +42,7 @@ class ReloveImageBubble extends StatelessWidget {
           padding: const EdgeInsets.only(top: 16.0),
           child: Text(
             title!,
-            style: const TextStyle(
-              fontSize: 16.0,
-              color: kDarkTextColor
-            ),
+            style: const TextStyle(fontSize: 16.0, color: kDarkTextColor),
           ),
         ),
         Padding(

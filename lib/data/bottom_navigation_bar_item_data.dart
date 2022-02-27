@@ -52,12 +52,12 @@ class BottomNavigationBarData {
     ),
   ];
 
-  static final screens = [
-    const HomeScreenComponents(),
-    const SellScreen(),
-    const NotificationScreen(),
-    const ProfileScreen(),
-  ];
+  // static final screens = [
+  //   const HomeScreenComponents(),
+  //   const SellScreen(),
+  //   const NotificationScreen(),
+  //   const ProfileScreen(),
+  // ];
 
 }
 

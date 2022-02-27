@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:relove/constants.dart';
 import 'package:relove/data/category_data.dart';
 import 'package:relove/components/home/CategoryBubble.dart';
 import 'package:relove/screens/categories/categories_screen.dart';
+import 'package:relove/components/product/ProductCard.dart';
+
 class HomeScreenComponents extends StatelessWidget {
-  const HomeScreenComponents({Key? key}) : super(key: key);
+  const HomeScreenComponents({Key? key, required this.womenClothesData}) : super(key: key);
+
+  final womenClothesData;
 
   @override
   Widget build(BuildContext context) {
@@ -27,75 +33,40 @@ class HomeScreenComponents extends StatelessWidget {
               },
             ),
           ),
-          GridView.count(
-            shrinkWrap: true,
-            primary: false,
-            padding: const EdgeInsets.all(20),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            crossAxisCount: 2,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text("He'd have you all unravel at the"),
-                color: Colors.teal[100],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Heed not the rabble'),
-                color: Colors.teal[200],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Sound of screams but the'),
-                color: Colors.teal[300],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Who scream'),
-                color: Colors.teal[400],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution is coming...'),
-                color: Colors.teal[500],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution, they...'),
-                color: Colors.teal[600],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text("He'd have you all unravel at the"),
-                color: Colors.teal[100],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Heed not the rabble'),
-                color: Colors.teal[200],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Sound of screams but the'),
-                color: Colors.teal[300],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Who scream'),
-                color: Colors.teal[400],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution is coming...'),
-                color: Colors.teal[500],
-              ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Revolution, they...'),
-                color: Colors.teal[600],
-              ),
-            ],
+          FutureBuilder(
+            future: womenClothesData,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return GridView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 15,
+                    padding: const EdgeInsets.all(8.0),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 300,
+                      // childAspectRatio: 3 / 2,
+                      crossAxisSpacing: 1,
+                      mainAxisSpacing: 1,
+                    ),
+                    itemBuilder: (context, index) {
+                      List data = snapshot.data as List;
+                      return ProductCard(
+                        onTap: () {
+                          // var data = snapshot.data.map((doc) => doc.data()).toList();
+                          // print(snapshot.data[index].data()["name"]);
+                          print("product card ${data[0]}");
+                          // print('data is ${snapshot.data[i].data()['name']}');
+                        },
+                        // productData: data[0],
+                      );
+                    });
+              } else {
+                return const CircularProgressIndicator(
+                  color: kPrimaryColor,
+                );
+              }
+            },
           ),
         ],
       ),
