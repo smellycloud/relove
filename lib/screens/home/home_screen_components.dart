@@ -41,18 +41,19 @@ class HomeScreenComponents extends StatelessWidget {
                 return GridView.builder(
                     shrinkWrap: true,
                     primary: false,
-                    itemCount: 1,
+                    itemCount: 10,
                     padding: const EdgeInsets.all(8.0),
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 300,
-                      // childAspectRatio: 3 / 2,
+                      childAspectRatio: 2/2.5,
                       crossAxisSpacing: 1,
                       mainAxisSpacing: 1,
                     ),
                     itemBuilder: (context, index) {
                       List data = snapshot.data as List;
                       return ProductCard(
+                        productData: data[0],
                         onTap: () {
                           print("product card ${data[0]}");
                           Navigator.push(
