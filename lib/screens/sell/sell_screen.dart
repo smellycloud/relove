@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 
 // import 'package:flutter_svg/flutter_svg.dart';
-import 'package:relove/components/common/ReloveNavigationTile.dart';
-import 'package:relove/components/common/RoundedBottomButton.dart';
+import 'package:relove/components/common/relove_navigation_tile.dart';
+import 'package:relove/components/common/rounded_bottom_button.dart';
 import 'package:relove/screens/sell/sell_instructions_screen.dart';
 
 class SellScreen extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/preferences/SizeSelectorBubble.dart';
+import 'package:relove/components/preferences/size_selector_bubble.dart';
 import 'package:relove/models/size_preferences.dart';
 
 class SizeSelectorCard extends StatefulWidget {

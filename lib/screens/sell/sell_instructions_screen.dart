@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/ReloveCustomSliverAppBar.dart';
-import 'package:relove/components/common/ReloveImageBubble.dart';
-import 'package:relove/components/common/RoundedBottomButton.dart';
+import 'package:relove/components/common/relove_custom_sliver_appbar.dart';
+import 'package:relove/components/common/relove_image_bubble.dart';
+import 'package:relove/components/common/rounded_bottom_button.dart';
 
 class SellInstructionsScreen extends StatelessWidget {
   static const id = "sell_instructions_screen";

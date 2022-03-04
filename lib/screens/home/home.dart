@@ -1,15 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/ReloveNestedScrollView.dart';
+import 'package:relove/components/common/relove_nested_scroll_view.dart';
 import 'package:relove/data/bottom_navigation_bar_item_data.dart';
 
 import 'package:relove/screens/sell/sell_screen.dart';
 import 'package:relove/screens/notifications/notification_screen.dart';
 import 'package:relove/screens/profile/profile_screen.dart';
 import 'package:relove/screens/home/home_screen_components.dart';
-import 'package:relove/relove_firebase/ReloveFirestoreRead.dart';
+import 'package:relove/relove_firebase/relove_firestore_read.dart';
 
 class Home extends StatefulWidget {
   static const id = 'home';

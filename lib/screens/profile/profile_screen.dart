@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/ReloveNestedScrollView.dart';
+import 'package:relove/components/common/relove_nested_scroll_view.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 

@@ -4,8 +4,8 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import 'package:relove/constants.dart';
 
-import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
-import 'package:relove/components/common/RoundedBottomButton.dart';
+import 'package:relove/components/authentication/relove_logo_with_tagline.dart';
+import 'package:relove/components/common/rounded_bottom_button.dart';
 
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -17,8 +17,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:relove/screens/home/home.dart';
 import 'package:relove/screens/preferences/size_preference_screen.dart';
 
-import 'package:relove/relove_firebase/ReloveFirestoreWrite.dart';
-import 'package:relove/relove_firebase/ReloveFirestoreRead.dart';
+import 'package:relove/relove_firebase/relove_firestore_write.dart';
+import 'package:relove/relove_firebase/relove_firestore_read.dart';
 
 class OTPScreen extends StatefulWidget {
   static const id = 'otp_screen';

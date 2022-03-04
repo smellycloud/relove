@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/ReloveCustomSliverAppBar.dart';
+import 'package:relove/data/appbar_actions.dart';
 import 'package:relove/data/category_data.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CategoriesScreen extends StatefulWidget {
   static const id = 'categories_screen';
@@ -17,37 +18,56 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            const ReloveCustomSliverAppBar(titleText: 'Categories'),
-          ];
-        },
-        body: ListView.builder(
-          itemCount: categoryData.length-1,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Container(
-              color: categoryData[index+1].color,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/categoryData.length-1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(categoryData[index+1].title),
-                      Text(categoryData[index+1].subtext!),
-                    ],
-                  ),
-                ],
-              ),
-            );
+      appBar: AppBar(
+        title: const Text(
+          'Categories',
+          style: TextStyle(
+            fontSize: 18.0,
+            color: kLightTextColor,
+          ),
+        ),
+        leading: IconButton(
+          splashRadius: kButtonSplashRadius,
+          splashColor: Colors.transparent,
+          icon: SvgPicture.asset(
+            kBackButtonImageSource,
+            height: 24.0,
+            width: 24.0,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
           },
         ),
+        toolbarHeight: 65.0,
+        elevation: 0.0,
+        backgroundColor: kPrimaryColor,
+        actions: appbarActions,
+      ),
+      body: ListView.builder(
+        itemCount: categoryData.length - 1,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return Container(
+            color: categoryData[index + 1].color,
+            width: MediaQuery.of(context).size.width,
+            height:
+                MediaQuery.of(context).size.height / categoryData.length - 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(categoryData[index + 1].title),
+                    Text(categoryData[index + 1].subtext!),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/common/RoundedBottomButton.dart';
-import 'package:relove/components/preferences/SizeSelectorCard.dart';
+import 'package:relove/components/common/rounded_bottom_button.dart';
+import 'package:relove/components/preferences/size_selector_card.dart';
 import 'package:relove/models/size_preferences.dart';
 import 'package:relove/screens/home/home.dart';
 class SizePreferenceScreen extends StatelessWidget {

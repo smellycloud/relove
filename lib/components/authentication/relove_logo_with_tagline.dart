@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
-import 'package:relove/components/ReloveImage.dart';
+import 'package:relove/components/relove_image.dart';
 class ReloveLogoWithTagline extends StatelessWidget {
   const ReloveLogoWithTagline({
     Key? key,

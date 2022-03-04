@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:relove/components/common/RoundedBottomButton.dart';
-import 'package:relove/components/authentication/ReloveLogoWithTagline.dart';
+import 'package:relove/components/common/rounded_bottom_button.dart';
+import 'package:relove/components/authentication/relove_logo_with_tagline.dart';
 import 'otp_screen.dart';
 
 class AuthenticationScreen extends StatelessWidget {

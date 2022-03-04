@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:relove/screens/sell/sell_screen.dart';
-import 'package:relove/screens/notifications/notification_screen.dart';
-import 'package:relove/screens/profile/profile_screen.dart';
-import 'package:relove/screens/home/home_screen_components.dart';
+// import 'package:relove/screens/sell/sell_screen.dart';
+// import 'package:relove/screens/notifications/notification_screen.dart';
+// import 'package:relove/screens/profile/profile_screen.dart';
+// import 'package:relove/screens/home/home_screen_components.dart';
 
 class BottomNavigationBarData {
 

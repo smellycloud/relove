@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+// import 'package:relove/components/appbar/cart_button.dart';
+// import 'package:relove/components/appbar/search_button.dart';
+// import 'package:relove/components/appbar/wishlist_button.dart';
+import 'package:relove/data/appbar_actions.dart';
 class ReloveCustomSliverAppBar extends StatelessWidget {
   const ReloveCustomSliverAppBar({
     Key? key,
@@ -11,6 +14,7 @@ class ReloveCustomSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      actions: appbarActions,
       title: Text(
         titleText,
       ),

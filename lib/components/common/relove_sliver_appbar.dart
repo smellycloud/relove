@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 
-import 'package:relove/components/appbar/SearchButton.dart';
-import 'package:relove/components/appbar/CartButton.dart';
-import 'package:relove/components/appbar/WishlistButton.dart';
+// import 'package:relove/components/appbar/search_button.dart';
+// import 'package:relove/components/appbar/cart_button.dart';
+// import 'package:relove/components/appbar/wishlist_button.dart';
+import 'package:relove/data/appbar_actions.dart';
 
 class ReloveSliverAppBar extends StatelessWidget {
   const ReloveSliverAppBar({
@@ -38,18 +39,7 @@ class ReloveSliverAppBar extends StatelessWidget {
       ),
       expandedHeight: 100.0,
       backgroundColor: kPrimaryColor,
-      actions: [
-        SearchButton(
-          onPressed: () {
-          },
-        ),
-        WishlistButton(
-          onPressed: () {},
-        ),
-        CartButton(
-          onPressed: () {},
-        ),
-      ],
+      actions: appbarActions,
     );
   }
 }
