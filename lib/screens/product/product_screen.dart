@@ -228,20 +228,17 @@ class _ProductScreenState extends State<ProductScreen> {
             color: kDividerColor,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0, right: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    'Select Size',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: kDarkTextColor,
-                      fontWeight: FontWeight.w700,
-                    ),
+                const Text(
+                  'Select Size',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: kDarkTextColor,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 SizedBox(
@@ -252,19 +249,16 @@ class _ProductScreenState extends State<ProductScreen> {
                     shrinkWrap: true,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Go to size chart!');
-                    },
-                    child: const Text(
-                      'See size chart',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 14.0,
-                        decoration: TextDecoration.underline,
-                      ),
+                GestureDetector(
+                  onTap: () {
+                    print('Go to size chart!');
+                  },
+                  child: const Text(
+                    'See size chart',
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 14.0,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),

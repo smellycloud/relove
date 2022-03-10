@@ -32,7 +32,7 @@ class RoundedBottomButton extends StatelessWidget {
         elevation: 0.0,
         textColor: kLightTextColor,
         height: 40.0,
-        splashColor: isDisabled ? kLightSubtextColor : kPrimaryColor,
+        splashColor: isDisabled ? Colors.transparent : kPrimaryColor,
         minWidth: MediaQuery
             .of(context)
             .size

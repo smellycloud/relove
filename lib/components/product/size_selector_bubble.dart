@@ -16,7 +16,8 @@ class SizeSelectorBubble extends StatelessWidget {
       child: Container(
         width: 50.0,
         height: 50.0,
-        margin: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+        // margin: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+        margin: const EdgeInsets.only(right: 16.0),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: sizeSelectorData['isSelected'] as bool ? kPrimaryColor : Colors.white,
