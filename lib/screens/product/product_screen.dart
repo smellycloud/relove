@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:relove/utilities/string_extension.dart';
 import 'package:relove/components/product/size_selector_bubble.dart';
 import 'package:relove/components/common/rounded_bottom_button.dart';
+import 'package:relove/components/product/policy_card.dart';
+import 'package:relove/components/common/relove_small_navigation_tile.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key, required this.productData}) : super(key: key);
@@ -22,6 +24,8 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    sizeData = [];
+    isCartButtonDisabled = true;
     widget.productData['quantity'].forEach((key, value) {
       print("Key : $key, Value : $value");
       if (value > 0) {
@@ -87,9 +91,9 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width / 1.2,
                   child: RoundedBottomButton(
-                    isDisabled: isCartButtonDisabled,
+                      isDisabled: isCartButtonDisabled,
                       onPressed: () {
-                        if(isCartButtonDisabled) {
+                        if (isCartButtonDisabled) {
                           print("Disabled");
                         } else {
                           print("Add to cart");
@@ -163,10 +167,15 @@ class _ProductScreenState extends State<ProductScreen> {
                         ),
                       ],
                     ),
-                    const Icon(
-                      Icons.share_outlined,
-                      color: kDarkTextColor,
-                      size: 32.0,
+                    GestureDetector(
+                      onTap: () {
+                        print("Share!");
+                      },
+                      child: const Icon(
+                        Icons.share_outlined,
+                        color: kDarkTextColor,
+                        size: 32.0,
+                      ),
                     ),
                   ],
                 ),
@@ -228,7 +237,8 @@ class _ProductScreenState extends State<ProductScreen> {
             color: kDividerColor,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(
+                top: 16.0, bottom: 16.0, left: 16.0, right: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,12 +279,62 @@ class _ProductScreenState extends State<ProductScreen> {
             thickness: kDividerThickness,
             color: kDividerColor,
           ),
-
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                PolicyCard(
+                    title: 'Genuine Quality',
+                    subText: 'All products checked to ensure highest quality',
+                    iconLocation: 'assets/utilities/genuine_quality.png'),
+                VerticalDivider(
+                  color: kDividerColor,
+                  thickness: 1.5,
+                ),
+                PolicyCard(
+                    title: 'Easy Returns',
+                    subText:
+                        '15 day return/exchange policy in case of fit issues',
+                    iconLocation: 'assets/utilities/easy_return.png'),
+              ],
+            ),
+          ),
+          const Divider(
+            thickness: kDividerThickness,
+            color: kDividerColor,
+          ),
+          ReloveSmallNavigationTile(
+            title: 'Shipping Policy',
+            onTap: () {
+              print('Shipping Policy');
+            },
+          ),
+          const Divider(
+            thickness: 1.0,
+            color: kDividerColor,
+          ),
+          ReloveSmallNavigationTile(
+            title: 'How we verify product quality',
+            onTap: () {
+              print('Quality');
+            },
+          ),
+          const Divider(
+            thickness: 1.0,
+            color: kDividerColor,
+          ),
+          ReloveSmallNavigationTile(
+            title: 'Privacy Policy',
+            onTap: () {
+              print('Privacy Policy');
+            },
+          ),
         ],
       ),
     );
   }
 }
+
 // {quantity: {XS: 1}, origin: "kit_id",
 // image_urls: [https://firebasestorage.googleapis.com/v0/b/relove-73aaf.appspot.com/o/products%2Fclothing%2Fwomen%2FEBtryoPXhsfzztntFCKx.jpeg?alt=media&token=23a3d28e-d102-4df1-945b-aff7892ccedc],
 // type: clothing, colors: [brown], tags: [sweatshirt, h&m, brown, winter, crewneck],

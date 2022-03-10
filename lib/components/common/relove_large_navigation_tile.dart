@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ReloveNavigationTile extends StatelessWidget {
-  const ReloveNavigationTile({
+class ReloveLargeNavigationTile extends StatelessWidget {
+  const ReloveLargeNavigationTile({
     Key? key,
     required this.title,
     required this.subText,

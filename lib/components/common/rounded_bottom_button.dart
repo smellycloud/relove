@@ -36,7 +36,7 @@ class RoundedBottomButton extends StatelessWidget {
         minWidth: MediaQuery
             .of(context)
             .size
-            .width,
+            .width/1.075, //SUPER JANKY! PLS FIX
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
           side: showBorder ? _borderSide : BorderSide.none,

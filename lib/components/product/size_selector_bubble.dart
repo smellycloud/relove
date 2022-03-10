@@ -14,8 +14,8 @@ class SizeSelectorBubble extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 50.0,
-        height: 50.0,
+        width: 45.0,
+        height: 45.0,
         // margin: const EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
         margin: const EdgeInsets.only(right: 16.0),
         decoration: BoxDecoration(
@@ -31,7 +31,7 @@ class SizeSelectorBubble extends StatelessWidget {
             sizeSelectorData['size'],
             style: TextStyle(
                 color: sizeSelectorData['isSelected'] as bool ? kLightTextColor : kDarkTextColor,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 fontSize: 14.0),
           ),
         ),

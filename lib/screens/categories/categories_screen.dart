@@ -49,19 +49,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         itemBuilder: (context, index) {
           return Container(
             color: categoryData[index + 1].color,
-            width: MediaQuery.of(context).size.width,
-            height:
-                MediaQuery.of(context).size.height / categoryData.length - 1,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(categoryData[index + 1].title),
-                    Text(categoryData[index + 1].subtext!),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
+                      child: Text(
+                        categoryData[index + 1].title,
+                        style: const TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 32.0),
+                      child: Text(
+                        categoryData[index + 1].subtext!,
+                        style: const TextStyle(
+                          fontSize: 12.0,
+                          color: kLightSubtextColor
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -72,3 +85,30 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     );
   }
 }
+
+// body: ListView.builder(
+// itemCount: categoryData.length - 1,
+// scrollDirection: Axis.vertical,
+// itemBuilder: (context, index) {
+// return Container(
+// color: categoryData[index + 1].color,
+// width: MediaQuery.of(context).size.width,
+// height:
+// MediaQuery.of(context).size.height / categoryData.length - 1,
+// child: Row(
+// mainAxisAlignment: MainAxisAlignment.start,
+// crossAxisAlignment: CrossAxisAlignment.center,
+// children: [
+// Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Text(categoryData[index + 1].title),
+// Text(categoryData[index + 1].subtext!),
+// ],
+// ),
+// ],
+// ),
+// );
+// },
+// ),

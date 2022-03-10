@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relove/constants.dart';
 
 // import 'package:flutter_svg/flutter_svg.dart';
-import 'package:relove/components/common/relove_navigation_tile.dart';
+import 'package:relove/components/common/relove_large_navigation_tile.dart';
 import 'package:relove/components/common/rounded_bottom_button.dart';
 import 'package:relove/screens/sell/sell_instructions_screen.dart';
 
@@ -63,7 +63,7 @@ class SellScreen extends StatelessWidget {
                 ),
               ),
             ),
-            ReloveNavigationTile(
+            ReloveLargeNavigationTile(
               title: 'How it works',
               subText:
                   'Fill up our boxes with your clothes and send them to us. We’ll handle the rest!',
@@ -76,7 +76,7 @@ class SellScreen extends StatelessWidget {
               thickness: 0.5,
               color: kDividerColor,
             ),
-            ReloveNavigationTile(
+            ReloveLargeNavigationTile(
               title: 'Credit Scheme',
               subText:
                   'Once Items are received we calculate how much each item will sell for. These credits can be used inside our app!',
