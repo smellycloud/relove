@@ -13,6 +13,7 @@ const kCategoryBubbleBackgroundColor = Color(0xFFDA879A);
 const kDividerColor = Color(0xFFF5F5F5);
 
 const kButtonSplashRadius = 20.0;
+const kDividerThickness = 8.0;
 
 const kLogoImageSource = 'assets/logo/relove.png';
 const kSearchButtonImageSource = 'assets/utilities/search.svg';
@@ -22,7 +23,7 @@ const kBackButtonImageSource = 'assets/utilities/back.svg';
 const kCartButtonImageSource = 'assets/utilities/cart.svg';
 const kFilterButtonImageSource = 'assets/utilities/filter.svg';
 const kCardBackgroundImageSource = 'assets/component_images/card_background_image.png';
-
+const kSellIconImageSource = 'assets/bottom_navigation_bar/sell_unselected.svg';
 
 const kPhoneNumberTextStyle = TextStyle(
   color: kLightTextColor,

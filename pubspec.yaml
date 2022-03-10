@@ -79,6 +79,8 @@ flutter:
     - assets/utilities/search.svg
     - assets/utilities/navigate.svg
     - assets/utilities/wishlist_unselected.svg
+    - assets/utilities/easy_return.png
+    - assets/utilities/genuine_quality.png
     - assets/category_images/accessories.png
     - assets/category_images/beauty.png
     - assets/category_images/kids.png
