@@ -44,71 +44,80 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         actions: appbarActions,
       ),
       body: ListView.builder(
-        itemCount: categoryData.length - 1,
+        shrinkWrap: false,
+        itemCount: categoriesCount - 1,
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
-          return Container(
-            color: categoryData[index + 1].color,
-            child: Row(
+          return ExpansionTile(
+            title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 32.0),
-                      child: Text(
-                        categoryData[index + 1].title,
-                        style: const TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.w600),
-                      ),
+                    Text(
+                      categoryData(index + 1).title,
+                      style: const TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w600),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 32.0),
-                      child: Text(
-                        categoryData[index + 1].subtext!,
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          color: kLightSubtextColor
-                        ),
-                      ),
+                    Text(
+                      categoryData(index + 1).subtext!,
+                      style: const TextStyle(
+                          fontSize: 12.0, color: kLightSubtextColor),
                     ),
                   ],
                 ),
+                Image.asset(
+                  categoryData(index + 1).imageUrl!,
+                  height: 100,
+                  width: 100,
+                  // fit: BoxFit.contain,
+                  // alignment: Alignment.bottomCenter,
+                ),
               ],
             ),
+            iconColor: Colors.transparent,
+            collapsedIconColor: Colors.transparent,
+            backgroundColor: categoryData(index + 1).color,
+            collapsedBackgroundColor: categoryData(index + 1).color,
+            collapsedTextColor: kDarkTextColor,
+            textColor: kDarkTextColor,
+            // children: [
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Padding(
+            //             padding: const EdgeInsets.only(
+            //                 left: 16.0, right: 16.0, top: 32.0),
+            //             child: Text(
+            //               categoryData[index + 1].title,
+            //               style: const TextStyle(
+            //                   fontSize: 20.0, fontWeight: FontWeight.w600),
+            //             ),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.only(
+            //                 left: 16.0, right: 16.0, bottom: 32.0),
+            //             child: Text(
+            //               categoryData[index + 1].subtext!,
+            //               style: const TextStyle(
+            //                   fontSize: 12.0, color: kLightSubtextColor),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ],
           );
         },
       ),
     );
   }
 }
-
-// body: ListView.builder(
-// itemCount: categoryData.length - 1,
-// scrollDirection: Axis.vertical,
-// itemBuilder: (context, index) {
-// return Container(
-// color: categoryData[index + 1].color,
-// width: MediaQuery.of(context).size.width,
-// height:
-// MediaQuery.of(context).size.height / categoryData.length - 1,
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.start,
-// crossAxisAlignment: CrossAxisAlignment.center,
-// children: [
-// Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Text(categoryData[index + 1].title),
-// Text(categoryData[index + 1].subtext!),
-// ],
-// ),
-// ],
-// ),
-// );
-// },
-// ),

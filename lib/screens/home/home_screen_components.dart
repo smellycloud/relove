@@ -22,11 +22,11 @@ class HomeScreenComponents extends StatelessWidget {
             height: 120.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: categoryData.length,
+              itemCount: categoriesCount,
               itemBuilder: (context, index) {
                 return CategoryBubble(
-                  categoryTitle: categoryData[index].title,
-                  bubbleImageUrl: categoryData[index].bubbleImageUrl!,
+                  categoryTitle: categoryData(index).title,
+                  bubbleImageUrl: categoryData(index).bubbleImageUrl!,
                   onTap: () {
                     Navigator.pushNamed(context, CategoriesScreen.id);
                   },

@@ -2,7 +2,7 @@ import 'package:relove/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:relove/screens/categories/categories_screen.dart';
 
-var categoryData = [
+List<Category> _categoryData = [
   Category(
     id: '0',
     title: 'All',
@@ -35,7 +35,7 @@ var categoryData = [
     title: 'Men',
     subtext: "Tshirts, Shirts, Jeans and more",
     onTapNavigation: () {},
-    imageUrl: "assets/category_images/accessories.png",
+    imageUrl: "assets/category_images/men.png",
     bubbleImageUrl: "assets/category_bubble_images/men.png",
     color: const Color(0xFFFFF3EE),
   ),
@@ -44,7 +44,7 @@ var categoryData = [
     title: 'Kids',
     subtext: "Tshirts, Pants, Onesies and more",
     onTapNavigation: () {},
-    imageUrl: "assets/category_images/accessories.png",
+    imageUrl: "assets/category_images/kids.png",
     bubbleImageUrl: "assets/category_bubble_images/kids.png",
     color: const Color(0xFFDEDFFF),
   ),
@@ -53,7 +53,7 @@ var categoryData = [
     title: 'Beauty',
     subtext: "Makeup, Skincare and more",
     onTapNavigation: () {},
-    imageUrl: "assets/category_images/accessories.png",
+    imageUrl: "assets/category_images/beauty.png",
     bubbleImageUrl: "assets/category_bubble_images/beauty.png",
     color: const Color(0xFFFDEAFE),
   ),
@@ -68,6 +68,19 @@ var categoryData = [
   ),
 ];
 
-get categoryDataLength {
-  categoryData.length;
+get categoriesCount {
+  if(_categoryData.isEmpty) {
+    return 0;
+  } else {
+    return _categoryData.length;
+  }
+}
+
+categoryData(int index) {
+  if(index < categoriesCount) {
+    return _categoryData[index];
+  }
+  else {
+    return null;
+  }
 }
