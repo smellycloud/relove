@@ -7,6 +7,7 @@ import 'package:relove/components/product/size_selector_bubble.dart';
 import 'package:relove/components/common/rounded_bottom_button.dart';
 import 'package:relove/components/product/policy_card.dart';
 import 'package:relove/components/common/relove_small_navigation_tile.dart';
+import 'package:relove/components/product/product_details_card.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key, required this.productData}) : super(key: key);
@@ -299,6 +300,11 @@ class _ProductScreenState extends State<ProductScreen> {
               ],
             ),
           ),
+          const Divider(
+            thickness: kDividerThickness,
+            color: kDividerColor,
+          ),
+          ProductDetailsCard(productData: widget.productData),
           const Divider(
             thickness: kDividerThickness,
             color: kDividerColor,
